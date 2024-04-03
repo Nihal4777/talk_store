@@ -29,6 +29,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(auth()->user()->hasRole('admin'))
+            return redirect('/admin/categories');
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
