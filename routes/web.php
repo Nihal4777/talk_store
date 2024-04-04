@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TalksController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[WebsiteController::class,'homepage']);
+Route::get('/talks',[WebsiteController::class,'talks']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,6 +29,9 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(fun
     Route::resource('talks',TalksController::class);
 });
 
+Route::middleware(['auth','role:user'])->group(function () {
+   Route::post('createOrder',[PaymentController::class,'createOrder']);
+});
 
 
 Route::middleware('auth')->group(function () {

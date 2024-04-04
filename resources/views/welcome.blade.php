@@ -57,10 +57,13 @@
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="./past-purchase.html">Past Purchase</a>
                     </li>
-
-
+                    
+                    @auth
+                    <li class="nav-item"><a href="{{ url('/logout') }}" class="nav-link click-scroll">Logout</a></li>
+                    @else 
+                    <li class="nav-item"><a href="{{ url('/login') }}" class="nav-link click-scroll">Login</a></li>
+                    @endauth
                 </ul>
-
                 <div class="d-none d-lg-block ms-4">
                     <a href="./login.html" class="navbar-icon bi-person smoothscroll"
                         style="display: flex; justify-content: center; align-items: center;">Login</a>
