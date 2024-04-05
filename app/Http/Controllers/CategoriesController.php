@@ -15,7 +15,8 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories=Category::all();
-        return view('admin.categories.index',compact('categories'));
+        $category=new Category();
+        return view('admin.categories.index',compact('categories','category'));
     }
 
     /**
@@ -62,9 +63,8 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view("admin.categories.edit",['category'=>$category]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -74,7 +74,9 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->name=$request->name;
+        $category->save();
+        return redirect(route('categories.index'))->with('success',"Category Updated");
     }
 
     /**
@@ -85,8 +87,10 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        // if($categories->)
-        $category->delete();
-        return redirect(route('categories.index'))->withSuccess("Category Deleted");
+        if(!count($category->talks)){
+            $category->delete();
+            return redirect(route('categories.index'))->withSuccess("Category Deleted");
+        }
+        return redirect(route('categories.index'))->withErrors("Category has talks. Can't Delete"); 
     }
 }

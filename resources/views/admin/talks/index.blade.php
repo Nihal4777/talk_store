@@ -33,11 +33,16 @@
                         <td scope="row">{{$talk->person1_name}}</td>
                         <td scope="row">{{$talk->person2_name}}</td>
                         <td data-toggle="modal" data-target="#scriptEditModal" data-bs-target="#staticBackdrop">
-                            <div class="btn btn-success">Edit</div>
+                            <a class="btn btn-success" href="{{route('talks.edit',$talk->id)}}">Edit</a>
                         </td>
                         <td>
-                            <div class="btn btn-danger">Delete</div>
+                            <form  method="POST" action="{{route('talks.destroy',$talk->id)}}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </td>
+                        
 
                     </tr>
                 @endforeach
