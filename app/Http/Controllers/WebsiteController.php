@@ -20,4 +20,8 @@ class WebsiteController extends Controller
         $talks=Talk::get();
         return view('talks',compact('talks','categories'));
     }
+    public function purchasesPage(Request $request)
+    {
+        return view('puchasesPage');
+    }
 }

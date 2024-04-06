@@ -31,6 +31,8 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(fun
 
 Route::middleware(['auth','role:user'])->group(function () {
    Route::post('createOrder',[PaymentController::class,'createOrder']);
+   Route::post('verifyOrder',[PaymentController::class,'verifyOrder']);
+   Route::get('purchases',[WebsiteController::class,'purchasesPage']);
 });
 
 
