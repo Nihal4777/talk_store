@@ -28,7 +28,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#section_1">Home</a>
                     </li>
@@ -59,15 +59,11 @@
                     </li>
                     
                     @auth
-                    <li class="nav-item"><a href="{{ url('/logout') }}" class="nav-link click-scroll">Logout</a></li>
+                    <li class="d-none d-lg-block nav-item"><a href="{{ url('/logout') }}" class="nav-link click-scroll">Logout</a></li>
                     @else 
-                    <li class="nav-item"><a href="{{ url('/login') }}" class="nav-link click-scroll">Login</a></li>
+                    <li class="d-none d-lg-block nav-item"><a href="{{ url('/login') }}" class="nav-link click-scroll">Login</a></li>
                     @endauth
                 </ul>
-                <div class="d-none d-lg-block ms-4">
-                    <a href="./login.html" class="navbar-icon bi-person smoothscroll"
-                        style="display: flex; justify-content: center; align-items: center;">Login</a>
-                </div>
             </div>
         </div>
     </nav>
@@ -93,7 +89,7 @@
                         <p class="d-none">Image by <a
                                 href="https://www.freepik.com/free-vector/hand-drawn-teacher-s-day-background-spanish_25182514.htm#query=teacher%20teaching&position=12&from_view=keyword&track=ais&uuid=62bc56bc-063f-4eff-b642-f11ee74c04a0">Freepik</a>
                         </p>
-                        <img class="img-fluid" src="assets/home-page-teacher.png" alt="">
+                        <img class="img-fluid" src="{{asset("assets/images/home-page-teacher.png")}}" alt="">
                     </div>
                 </div>
             </div>
