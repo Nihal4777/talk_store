@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="{{asset("assets/css/bootstrap.min.css")}}" rel="stylesheet">
-    <link href="{{asset("assets/css/bootstrap-icons.css")}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="{{asset("assets/css/topic.css")}}" rel="stylesheet">
 </head>
 
@@ -32,33 +32,43 @@
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="#section_1">Home</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_2">How it works</a>
+                        <a class="nav-link click-scroll" href="/talks">Browse Talks</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_3">Browse Categories</a>
+                        <a class="nav-link click-scroll" href="/#section_2">How it works</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_4">Pricing</a>
+                        <a class="nav-link click-scroll" href="/#section_3">Browse Categories</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/#section_4">Pricing</a>
                     </li>
 
 
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="#section_5">FAQs</a>
+                        <a class="nav-link click-scroll" href="/#section_5">FAQs</a>
                     </li>
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link click-scroll" href="./chatpage.html">Conversation Page</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="./past-purchase.html">Past Purchase</a>
-                    </li>
+                    </li> --}}
                     
+
                     @auth
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/purchases">My Purchases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="/profile">Profile</a>
+                    </li>
                     <li class="d-none d-lg-block nav-item"><a href="{{ url('/logout') }}" class="nav-link click-scroll">Logout</a></li>
                     @else 
                     <li class="d-none d-lg-block nav-item"><a href="{{ url('/login') }}" class="nav-link click-scroll">Login</a></li>

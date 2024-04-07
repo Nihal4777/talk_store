@@ -13,31 +13,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($talks as $order)
                     <tr>
-                        <td>Script 1</td>
+                        <td>{{$order->talk->title}}</td>
                         <td class="align-middle">
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">40%</div>
+                                <div class="progress-bar" role="progressbar" style="width: {{$order->progress}}%;color:#efefef;" aria-valuenow="{{$order->progress}}"
+                                <div class="progress-bar" role="progressbar" style="width: {{$order->progress}}%;color:#efefef;" aria-valuenow="{{$order->progress}}"
+                                    aria-valuemin="0" aria-valuemax="100">{{$order->progress}}%</div>
                             </div>
                         </td>
                         <td>
-                            <div class="btn btn-success">Continue challenge</div>
+                            <a class="btn btn-success" href="/talk/chat/{{$order->talk_id}}">Continue challenge</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Script 2</td>
-                        <td class="align-middle">
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 90%;" aria-valuenow="25"
-                                    aria-valuemin="0" aria-valuemax="100">90%</div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="btn btn-success">Continue challenge</div>
-                        </td>
-                    </tr>
-
+                    @endforeach
                 </tbody>
             </table>
         </div>

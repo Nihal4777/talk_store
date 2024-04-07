@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         DB::transaction(function(){
             Role::create(['name'=>'admin']);
             Role::create(['name'=>'user']);
+            Role::create(['name'=>'expert']);
             $user=\App\Models\User::factory()->create([
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
