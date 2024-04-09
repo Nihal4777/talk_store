@@ -1,11 +1,11 @@
 <x-primary-layout>
 
 
-    <section class="explore-section bg-white" id="section_3" style="padding-top: 50px">
+    <section class="explore-section bg-primary" id="section_3" style="padding-top: 100px">
         <div class="container">
 
             <div class="col-12 text-center">
-                <h2 class="mb-4">Browse Topics</h1>
+                <h2 class="mb-4 text-white">Browse Topics</h1>
             </div>
 
         </div>
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row mb-4" style="gap: 10px">
                 <div class="d-flex">
-                    <h4 class="p-3">
+                    <h4 class="p-3 text-white">
                         Choose category :
                     </h4>
                     <div class="p-3">
