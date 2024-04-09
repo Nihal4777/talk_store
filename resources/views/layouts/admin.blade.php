@@ -12,63 +12,71 @@
 </head>
 
 <body>
-    <div class="navigation" id="sideBar">
-        <ul>
-            <li class="list active">
-                <a href="{{ route('categories.index') }}">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Categories</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ route('talks.index') }}">
-                    <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
-                    <span class="title">View Scripts</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="{{ route('talks.create') }}">
-                    <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
-                    <span class="title">Add Scripts</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="./manage-subscription.html">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <span class="title">Manage Subscription</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="./manage-users.html">
-                    <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
-                    <span class="title">Manage Users</span>
-                </a>
-            </li>
 
-            <!-- <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                    <span class="title">Setting</span>
-                </a> -->
-            <!--    </li> <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
-                    <span class="title">Help</span>
-                </a>
-            </li> <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <span class="title">Password</span>
-                </a>
-            </li>-->
-            <li class="list">
-                <a href="{{ route('logout') }}">
-                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                    <span class="title">Sign Out</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+
+    @role('admin')
+        <div class="navigation" id="sideBar">
+            <ul>
+                <li class="list {{ Request::segment(2) == 'categories' ? 'active' : '' }}">
+                    <a href="{{ route('categories.index') }}">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title">Categories</span>
+                    </a>
+                </li>
+                <li class="list {{ Request::segment(2) == 'talks' && Request::segment(3) == '' ? 'active' : '' }}">
+                    <a href="{{ route('talks.index') }}">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">View Scripts</span>
+                    </a>
+                </li>
+                <li class="list {{ Request::segment(3) == 'create' ? 'active' : '' }}">
+                    <a href="{{ route('talks.create') }}">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">Add Scripts</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./manage-subscription.html">
+                        <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                        <span class="title">Manage Subscription</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./manage-users.html">
+                        <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
+                        <span class="title">Manage Users</span>
+                    </a>
+                </li>
+
+                <!-- <li class="list">
+                    <a href="#">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title">Setting</span>
+                    </a> -->
+                <!--    </li> <li class="list">
+                    <a href="#">
+                        <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
+                        <span class="title">Help</span>
+                    </a>
+                </li> <li class="list">
+                    <a href="#">
+                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                        <span class="title">Password</span>
+                    </a>
+                </li>-->
+                <li class="list">
+                    <a href="{{ route('logout') }}">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    @endrole
+
+
+
+
     <div>
         <button id="toggleSideBar" class="btn btn-success" style="position:relative; margin-left: 20px;"
             onclick="sideNavResponsive()">

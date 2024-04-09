@@ -41,7 +41,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/#section_3">Browse Categories</a>
+                        <a class="nav-link click-scroll" href="/realTimeChat">Real time Chat</a>
                     </li>
 
                     <li class="nav-item">

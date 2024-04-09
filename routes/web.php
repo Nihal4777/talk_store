@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\LiveChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TalksController;
@@ -34,6 +35,8 @@ Route::middleware(['auth','role:user'])->group(function () {
    Route::post('verifyOrder',[PaymentController::class,'verifyOrder']);
    Route::get('purchases',[WebsiteController::class,'purchasesPage']);
    Route::get('/talk/chat/{talk_id}',[WebsiteController::class,'conversationPage']);
+   Route::get('realTimeChat',[LiveChatController::class,'realTimeChat']);
+   Route::post('pusher/auth',[LiveChatController::class,'authUser']);
 });
 
 

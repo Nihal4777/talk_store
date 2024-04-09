@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\LiveChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware(['auth:sanctum','role:user'])->post('/sendMessage',[ApiController::class,'sendMessage']);
+
+Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+    Route::post('/sendMessage', [ApiController::class, 'sendMessage']);
+    Route::post('/sendChatMessage/{id}', [LiveChatController::class, 'sendChatMessage']);
+});
 
