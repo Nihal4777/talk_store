@@ -5,6 +5,7 @@ use App\Http\Controllers\LiveChatController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TalksController;
+use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[WebsiteController::class,'homepage']);
 Route::get('/talks',[WebsiteController::class,'talks']);
 
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified','role:admin'])->name('dashboard');
@@ -36,8 +40,14 @@ Route::middleware(['auth','role:user'])->group(function () {
    Route::get('purchases',[WebsiteController::class,'purchasesPage']);
    Route::get('/talk/chat/{talk_id}',[WebsiteController::class,'conversationPage']);
    Route::get('realTimeChat',[LiveChatController::class,'realTimeChat']);
-   Route::post('pusher/auth',[LiveChatController::class,'authUser']);
 });
+Route::middleware(['auth','role:expert','verified'])->group(function () {
+    Route::get('/expert/liveChat',[LiveChatController::class,'expertLiveChat']);
+ });
+
+ Route::middleware(['auth','role:expert|user','verified'])->group(function () {
+    Route::post('pusher/auth',[LiveChatController::class,'authUser']);
+ });
 
 
 Route::middleware('auth')->group(function () {
@@ -45,5 +55,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::post('webhook/present',[WebhookController::class,'mark_online']);
+Route::post('webhook/absent',[WebhookController::class,'mark_offline']);
 
 require __DIR__.'/auth.php';

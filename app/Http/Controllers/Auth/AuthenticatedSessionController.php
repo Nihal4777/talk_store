@@ -32,6 +32,8 @@ class AuthenticatedSessionController extends Controller
         if(auth()->user()->hasRole('admin'))
             return redirect('/admin/categories');
 
+        if(auth()->user()->hasRole('expert'))
+            return redirect('/expert/liveChat');
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

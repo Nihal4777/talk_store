@@ -73,7 +73,25 @@
             </ul>
         </div>
     @endrole
-
+    @role('expert')
+    <div class="navigation" id="sideBar">
+        <ul>
+            <li class="list {{ Request::segment(2) == 'liveChat' ? 'active' : '' }}">
+                <a href="/expert/liveChat">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="title">Live Chat Support</span>
+                </a>
+            </li>
+           
+            <li class="list">
+                <a href="{{ route('logout') }}">
+                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span class="title">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+@endrole
 
 
 
