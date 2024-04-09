@@ -15,5 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/api/sendMessage',
         '/api/sendChatMessage/{id}',
         'pusher/auth',
+        'webhook/present',
+        'webhook/absent',
     ];
 }
