@@ -22,19 +22,21 @@ class MessageSend implements ShouldBroadcast
 
     private $receiver_id;
     private $user_id;
-
-    public function __construct($receiver_id,$user_id){
+    public $message;
+    public function __construct($receiver_id,$user_id,$message){
         $this->receiver_id=$receiver_id;
         $this->user_id=$user_id;
+        $this->message=$message;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
-    {
-        return new PresenceChannel('presence-chat-'.$this->receiver_id.'-'.$this->user_id);
+    public function broadcastOn(){
+        return ['presence-chat-'.$this->receiver_id.'-'.$this->user_id];
+    }
+    public function broadcastAs(){
+        return 'my-event';
     }
 }

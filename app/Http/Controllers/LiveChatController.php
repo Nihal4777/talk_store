@@ -5,34 +5,47 @@ namespace App\Http\Controllers;
 use App\Events\MessageSend;
 use App\Events\UserConnected;
 use App\Models\OnlineUser;
+use App\Models\Session;
 use App\Models\UserHasExpert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 
 class LiveChatController extends Controller
 {
-    function realTimeChat()
-    {
-        event(new UserConnected(3,2));
-        return ;
+    function realTimeChat(){
         $user = auth()->user();
+        /* ----------------- Check if the user is already connected ----------------- */
+        $expert=UserHasExpert::where(['user_id'=>$user->id,'end_time'=>NULL])->first();
+        if(!empty($expert))
+            return view('liveChat', compact('user', 'expert'));
+        /* ------------------------------------ - ----------------------------------- */
+
+        /* ------------------------ Check if user has minutes ----------------------- */
+        if($user->minutes<1) return redirect()->back()->with(['error' => 'No coins']);
         $expert = $this->getFreeExpert();
-        if (empty($expert)) return "no expert";
-        $oe = OnlineUser::where('user_id', $expert->user_id)->first();
-        $oe->is_busy = true;
-        $oe->save();
-        $ue = new UserHasExpert;
-        $ue->user_id = $user->id;
-        $ue->expert_id = $expert->user_id;
-        $ue->save();
-        event(new UserConnected($user->id,$expert->expert_id));
+        if (empty($expert)) return view('noExpert');
+
+        DB::transaction(function() use ($user,$expert){
+            $oe = OnlineUser::where('user_id', $expert->user_id)->first();
+            $oe->is_busy = true;
+            $oe->save();
+            $ue = new UserHasExpert;
+            $ue->user_id = $user->id;
+            $ue->start_time = date('Y-m-d h:i:s');
+            $ue->expert_id = $expert->user_id;
+            $ue->rate_per_min = env('RATE_PER_MIN');
+            $ue->save();
+        });
+        event(new UserConnected($expert->user_id));
         return view('liveChat', compact('user', 'expert'));
     }
     function expertLiveChat()
     {
         $user = auth()->user();
-        $ue=UserHasExpert::where(['expert_id'=>$user->id])->first();
+        $ue=UserHasExpert::where(['expert_id'=>$user->id,'end_time'=>NULL])->first();
         if(empty($ue)){
+            OnlineUser::where(['user_id'=>$user->id,'is_expert'=>true])->delete();
             $oUser = new OnlineUser();
             $oUser->user_id = $user->id;
             $oUser->is_expert = 1;
@@ -40,9 +53,6 @@ class LiveChatController extends Controller
             return view('admin.expert.waitingPage', compact('user'));
         }
         return view('admin.expert.liveChat',compact('user','ue'));
-
-
-        
     }
     public function authUser(Request $request)
     {

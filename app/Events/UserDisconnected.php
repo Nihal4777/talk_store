@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserConnected implements ShouldBroadcast
+class UserDisconnected implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,13 +19,14 @@ class UserConnected implements ShouldBroadcast
      *
      * @return void
      */
+    private $receiver_id;
     private $user_id;
-    private $expert_id;
     public $message;
-    public function __construct($expert_id){
-        $this->user_id=0;
-        $this->expert_id=$expert_id;
+    public function __construct($receiver_id,$user_id){
+        $this->receiver_id=$receiver_id;
+        $this->user_id=$user_id;
     }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -33,9 +34,9 @@ class UserConnected implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['presence-waiting-chat-'.$this->expert_id];
+        return ['presence-chat-'.$this->receiver_id.'-'.$this->user_id];
     }
     public function broadcastAs(){
-        return 'connected';
+        return 'disconnected';
     }
 }

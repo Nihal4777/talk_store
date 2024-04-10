@@ -19,6 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('expert_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('expert_id')->references('id')->on('users');
+            $table->unsignedBigInteger('rate_per_min');
+            $table->timestamp('start_time')->useCurrent();
+            $table->timestamp('end_time')->nullable();
             $table->timestamps();
         });
     }

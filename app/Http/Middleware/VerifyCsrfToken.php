@@ -13,7 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/api/sendMessage',
-        '/api/sendChatMessage/{id}',
+        '/api/sendChatMessage',
         'pusher/auth',
         'webhook/present',
         'webhook/absent',
