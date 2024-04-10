@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -96,9 +97,9 @@
 
 
     <div>
-        <button id="toggleSideBar" class="btn btn-success" style="position:relative; margin-left: 20px;"
+        <button id="toggleSideBar" class="btn" style="position:relative; margin-left: 20px;"
             onclick="sideNavResponsive()">
-            X
+            <i class="bi bi-list"></i>
         </button>
     </div>
 

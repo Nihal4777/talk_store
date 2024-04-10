@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:user|expert'])->group(function () {
     Route::post('/sendMessage', [ApiController::class, 'sendMessage']);
-    Route::post('/sendChatMessage/{id}', [LiveChatController::class, 'sendChatMessage']);
+    Route::post('/sendChatMessage', [ApiController::class, 'sendChatMessage']);
 });
 

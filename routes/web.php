@@ -36,7 +36,9 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(fun
 
 Route::middleware(['auth','role:user'])->group(function () {
    Route::post('createOrder',[PaymentController::class,'createOrder']);
+   Route::post('createOrderMin',[PaymentController::class,'createOrderMin']);
    Route::post('verifyOrder',[PaymentController::class,'verifyOrder']);
+   Route::post('verifyOrderMin',[PaymentController::class,'verifyOrderMin']);
    Route::get('purchases',[WebsiteController::class,'purchasesPage']);
    Route::get('/talk/chat/{talk_id}',[WebsiteController::class,'conversationPage']);
    Route::get('realTimeChat',[LiveChatController::class,'realTimeChat']);

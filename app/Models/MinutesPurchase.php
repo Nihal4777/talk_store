@@ -6,12 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserHasExpert extends Model
+class MinutesPurchase extends Model
 {
     use HasFactory;
-    public function expert():BelongsTo{
-        return $this->belongsTo(User::class);
-    }
+    protected $table='minute_purchases';
     public function user():BelongsTo{
         return $this->belongsTo(User::class);
     }
