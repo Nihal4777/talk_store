@@ -23,9 +23,11 @@
                         Choose category :
                     </h4>
                     <div class="p-3">
-                        <select class="form-select">
-                            <option selected value="*">All</option>
-                            <option value="Parth Pujara">Parth Pujara</option>
+                        <select class="form-select" onchange="window.location.href=`?cat=${event.target.value}`">
+                            <option selected value="">All</option>
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}" {{$category->id==app('request')->input('cat')?'selected':''}} >{{$category->name}}</option>    
+                            @endforeach
                         </select>
                     </div>
                 </div>
