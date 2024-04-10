@@ -70,7 +70,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/realTimeChat">Real time Chat</a>
+                        <a class="nav-link click-scroll" href="/#section_3">Browse Categories</a>
                     </li>
 
                     <li class="nav-item">
@@ -122,6 +122,8 @@
                 <div class="modal-body">
                     <div class="container py-4">
                         <div style="font-size: 18px; font-weight: bold;">Current available coins/mins : 100/10 mins</div>
+                        <div style="font-size: 16px; font-weight: bold;">1 min = 5 coins</div>
+                        <div style="font-size: 16px; font-weight: bold;">1 ₹ = 1 coin</div>
                         <div class="mb-3" style="font-size: 16px;">Add coins to add minutes</div>
                         <div class="row">
                             <div class="mx-auto">
@@ -133,7 +135,7 @@
                                         </button>
                                     </span>
                                     <input type="text" name="quant[1]" class="form-control input-number"
-                                        value="1" min="1" max="10">
+                                        value="1" min="1" max="100">
                                     <span class="input-group-append">
                                         <button type="button" class="btn btn-outline-secondary btn-number"
                                             data-type="plus" data-field="quant[1]">
@@ -141,10 +143,11 @@
                                         </button>
                                     </span>
                                 </div>
+                                <div id="price"></div>
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-success mt-3">Add coins</button>
+                            <button class="btn btn-success mt-3 add-coin-btn"></button>
                         </div>
                     </div>
                 </div>
@@ -253,6 +256,12 @@
         </script>
     @endif
     <script>
+    var calculatedPrice = 5;
+    var totalCoins = 1;
+$(document).ready(function(){
+     $('#price').text("₹ "+calculatedPrice);
+     $(".add-coin-btn").text("Add coins "+totalCoins)
+})
         $('.btn-number').click(function(e) {
             e.preventDefault();
 
@@ -265,6 +274,10 @@
 
                     if (currentVal > input.attr('min')) {
                         input.val(currentVal - 1).change();
+                        calculatedPrice = currentVal-1*5;
+                $('#price').text((currentVal-1)+" mins = "+"₹ "+calculatedPrice);
+                totalCoins = currentVal-1;
+                $(".add-coin-btn").text("Add coins "+totalCoins)
                     }
                     if (parseInt(input.val()) == input.attr('min')) {
                         $(this).attr('disabled', true);
@@ -274,6 +287,10 @@
 
                     if (currentVal < input.attr('max')) {
                         input.val(currentVal + 1).change();
+                         calculatedPrice = currentVal+1;
+                $('#price').text((currentVal+1)+" mins = "+"₹ "+calculatedPrice*5);
+                totalCoins = currentVal+1;
+                $(".add-coin-btn").text("Add coins "+totalCoins)
                     }
                     if (parseInt(input.val()) == input.attr('max')) {
                         $(this).attr('disabled', true);
@@ -296,12 +313,18 @@
             name = $(this).attr('name');
             if (valueCurrent >= minValue) {
                 $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled')
+                $('#price').text(valueCurrent+" mins = "+"₹ "+valueCurrent*5);
+                totalCoins = valueCurrent;
+                $(".add-coin-btn").text("Add coins "+totalCoins)
             } else {
                 alert('Sorry, the minimum value was reached');
                 $(this).val($(this).data('oldValue'));
             }
             if (valueCurrent <= maxValue) {
                 $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled')
+                $('#price').text(valueCurrent+" mins = "+"₹ "+valueCurrent*5);
+                totalCoins = valueCurrent;
+                $(".add-coin-btn").text("Add coins "+totalCoins)
             } else {
                 alert('Sorry, the maximum value was reached');
                 $(this).val($(this).data('oldValue'));

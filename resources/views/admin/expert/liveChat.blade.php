@@ -40,7 +40,7 @@
             cluster: 'ap2'
         });
 
-        var channel = pusher.subscribe('presence-chat-3-{{ $user->id }}');
+        var channel = pusher.subscribe('presence-chat-{{$ue->user_id}}-{{ $user->id }}');
         channel.bind('my-event', function(data) {
             alert(JSON.stringify(data));
         });
