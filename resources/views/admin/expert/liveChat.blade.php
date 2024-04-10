@@ -71,7 +71,6 @@
             parent.appendChild(child);
             mainContainer.appendChild(parent);
             mainContainer.scrollTo(0, mainContainer.scrollHeight);
-            textArea.value='';
             // parent.dataset.seq = newSeq;
             // let newSeq = Number(mainContainer.children[mainContainer.children.length - 1].dataset.seq) + 1;
             fetch('/api/sendChatMessage', {
@@ -87,7 +86,7 @@
                 })
                 .then((e) => e.json()).then((res) => {
                     if (res.status) {
-                        //
+                        textArea.value='';
                         // parent1.dataset.seq=res.nextSeq;
                     } else {
                         alert("Some error occurred");
