@@ -71,7 +71,7 @@
             child.appendChild(grandChild);
             parent.appendChild(child);
             mainContainer.appendChild(parent);
-            mainContainer.scrollTo(0, mainContainer.scrollHeight);.
+            mainContainer.scrollTo(0, mainContainer.scrollHeight);
             textArea.value='';
             // let newSeq=Number(mainContainer.children[mainContainer.children.length-1].dataset.seq)+1;
             fetch('/api/sendChatMessage', {
