@@ -24,8 +24,7 @@ class WebsiteController extends Controller
             $talks = Talk::get();
         return view('talks', compact('talks', 'categories'));
     }
-    public function purchasesPage(Request $request)
-    {
+    public function purchasesPage(Request $request){
         $talks = Order::where(['is_authorized' => true, "user_id" => auth()->user()->id])->orderByDesc('updated_at')->get();
         return view('puchasesPage', compact('talks'));
     }

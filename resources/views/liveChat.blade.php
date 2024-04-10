@@ -74,7 +74,7 @@
             mainContainer.scrollTo(0, mainContainer.scrollHeight);.
             textArea.value='';
             // let newSeq=Number(mainContainer.children[mainContainer.children.length-1].dataset.seq)+1;
-            fetch('http://localhost:8000/api/sendChatMessage', {
+            fetch('/api/sendChatMessage', {
                     'headers': {
                         'accept': 'application/json',
                         'content-type': 'application/json',
