@@ -12,9 +12,9 @@
                         <a href=""
                             class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInRight">Start
                             learning</a>
-                        <a href=""
+                        <!--<a href="/talks"
                             class="btn btn-outline-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact
-                            Us</a>
+                            Us</a>-->
                     </div>
                     <div class="col-lg-6 align-self-end text-center text-lg-end">
                         <p class="d-none">Image by <a
@@ -97,8 +97,7 @@
         <section id="pricing" class="pricing-content">
             <div class="container">
                 <div class="section-title text-center">
-                    <h2>Pricing Plans</h2>
-                    <p>Our Categories.</p>
+                    <h2 class="text-white">Pricing Plans</h2>
                 </div>
                 <div class="row text-center">
                     <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s"

@@ -33,7 +33,7 @@
                 </div>
                 <div class="row">
                     @foreach ($talks as $talk)
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                        <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-2">
                             <div class="custom-block bg-white shadow-lg">
                                 <div class="d-flex">
                                     <div>
@@ -43,7 +43,7 @@
                                         <p class="mb-0">₹{{ $talk->price }}</p>
                                     </div>
                                 </div>
-                                <button type="submit" name="talkId" value="{{ $talk->id }}"form="createOrder">Buy
+                                <button type="submit" class="btn btn-success" name="talkId" value="{{ $talk->id }}"form="createOrder">Buy
                                     Now</button>
 
                                 <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
@@ -69,7 +69,7 @@
                 <div class="clearfix"></div>
 
                 <div class="col-lg-5 col-12">
-                    <img src="images/faq_graphic.jpg" class="img-fluid" alt="FAQs">
+                    <img src="{{asset("assets/images/faq.png")}}" class="img-fluid" alt="FAQs">
                 </div>
 
                 <div class="col-lg-6 col-12 m-auto">

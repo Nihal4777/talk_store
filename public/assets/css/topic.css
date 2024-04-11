@@ -745,18 +745,7 @@
     position: relative;
   }
   
-  .site-footer::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 0 200px 200px;
-    border-color: transparent transparent var(--secondary-color) transparent;
-    pointer-events: none;
-  }
+  
   
   .site-footer-title {
     color: var(--primary-color); 
@@ -868,7 +857,7 @@
     }
   
     .navbar-expand-lg .navbar-nav .nav-link {
-      padding: 0;
+      padding: 10px;
     }
   
     .nav-tabs .nav-link:first-child {

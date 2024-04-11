@@ -14,15 +14,31 @@ body {
 }
 .navigation {
   position: relative;
-  width: 300px;
+  width: 340px;
   background: #2b363b;
-  box-shadow: 10px 0 0 #13547a;
-  border-left: 10px solid #2b363b;
+  box-shadow: 5px 0 0 #13547a;
+  /* border-left: 10px solid #2b363b; */
   overflow: hidden;
-  transition: width 0.5s;
+  transition: all 0.5s;
 }
 .navigation.mobile{
   margin-left: -310px;
+}
+@media screen and (max-width: 768px) {
+  .navigation {
+    width: 400px
+  }
+  .navigation.mobile{
+    margin-left: -390px;
+  }
+}
+@media screen and (max-width: 425px) {
+  .navigation {
+    width: 500%
+  }
+  .navigation.mobile{
+    margin-left: -405%;
+  }
 }
 .navigation ul {
   position: absolute;
@@ -91,11 +107,16 @@ body {
 .navigation ul li a .title {
   position: relative;
   display: block;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   height: 60px;
   line-height: 60px;
+  font-size: 14px
 }
-
+@media screen and (max-width: 425px) {
+  .navigation ul li a .title{
+    font-size: 12px;
+  }
+}
 .workspace {
   width: 100%;
   overflow-x: hidden;
