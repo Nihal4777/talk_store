@@ -36,7 +36,7 @@
                         <span class="title">Add Scripts</span>
                     </a>
                 </li>
-                <li class="list">
+                <!--<li class="list">
                     <a href="./manage-subscription.html">
                         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                         <span class="title">Manage Subscription</span>
@@ -47,7 +47,7 @@
                         <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
                         <span class="title">Manage Users</span>
                     </a>
-                </li>
+                </li>-->
 
                 <!-- <li class="list">
                     <a href="#">

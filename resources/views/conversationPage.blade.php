@@ -67,6 +67,14 @@
                 })
             })
             .then((e)=>e.json()).then((res)=>{
+				let parent1=document.createElement('div');
+                    parent1.classList.add('d-flex','justify-content-start','mb-4');
+                    let child1=document.createElement('div');
+                    child1.classList.add('msg_cotainer');
+                    child1.innerText=res.nextMessage;
+                    parent1.appendChild(child1);
+                    mainContainer.appendChild(parent1);
+                    parent1.dataset.seq=res.nextSeq;
                 if(!res.isEnd){
                     let parent=document.createElement('div');
                     parent.classList.add('d-flex','justify-content-end','mb-4');
@@ -79,20 +87,13 @@
                     parent.appendChild(child);
                     mainContainer.appendChild(parent);
                     parent.dataset.seq=newSeq;
-
-                    let parent1=document.createElement('div');
-                    parent.classList.add('d-flex','justify-content-start','mb-4');
-                    let child1=document.createElement('div');
-                    child1.classList.add('msg_cotainer');
-                    child1.innerText=res.nextMessage;
-                    parent1.appendChild(child1);
-                    mainContainer.appendChild(parent1);
-                    parent1.dataset.seq=res.nextSeq;
                 }
                 else{
                     alert("Completed");
                 }
+				mainContainer.scrollTo(0, mainContainer.scrollHeight);
             }).finally(()=>{
+				textArea.value="";
                 textArea.disabled=false;
                 send_btn.disabled=false;
             });
