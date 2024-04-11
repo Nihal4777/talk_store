@@ -118,7 +118,7 @@
                                 <div class="pricing-price">
 
                                 </div>
-                                <a href="./payment-summary-scripted.html" class="price_btn">Start Now</a>
+                                <a href="./talks" class="price_btn">Start Now</a>
                             </div>
                         </div>
                     </div><!--- END COL -->
@@ -139,7 +139,7 @@
                                 <div class="pricing-price">
 
                                 </div>
-                                <a href="./payment-summary-real-time.html" class="price_btn">Start Now</a>
+                                <a href="./realTimeChat" class="price_btn">Start Now</a>
                             </div>
                         </div>
                     </div><!--- END COL -->
