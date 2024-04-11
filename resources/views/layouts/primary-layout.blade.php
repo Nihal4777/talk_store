@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/#section_1">Home</a>
+                        <a class="nav-link click-scroll" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link click-scroll" href="/talks">Browse Talks</a>
@@ -105,9 +105,10 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-black m-0 ms-2" href="" data-bs-toggle="modal" data-bs-target="#addCoins"><i
-                                            class="bi bi-c-circle"></i> Coins
-                                        ({{ auth()->user()->minutes }})</a>
+                                    <a class="nav-link text-black m-0 ms-2" href="" data-bs-toggle="modal"
+                                        data-bs-target="#addCoins"><i class="bi bi-c-circle"></i> Coins
+                                        ({{ auth()->user()->minutes }})
+                                    </a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -116,30 +117,29 @@
                                         class="nav-link click-scroll text-black m-0 ms-2">Logout</a></li>
                             </ul>
                         </li>
-                       
-                                <li class="nav-item d-block d-lg-none">
-                                    <a class="nav-link click-scroll" href="/profile">Profile</a>
-                                </li>
-                                <li class="nav-item d-block d-lg-none">
-                                    <a class="nav-link click-scroll" href="/purchases">My Purchases</a>
-                                </li>
 
-                                <li class="nav-item d-block d-lg-none">
-                                    <a class="nav-link click-scroll" href="/realTimeChat">Live Chat</a>
-                                </li>
-                                <li class="nav-item d-block d-lg-none">
-                                    <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#addCoins"><i
-                                            class="bi bi-c-circle"></i> Coins
-                                        ({{ auth()->user()->minutes }})</a>
-                                </li> 
-                                <li class=" nav-item d-block d-lg-none"><a href="{{ url('/logout') }}"
-                                        class="nav-link click-scroll">Logout</a></li>
-                            
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link click-scroll" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link click-scroll" href="/purchases">My Purchases</a>
+                        </li>
+
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link click-scroll" href="/realTimeChat">Live Chat</a>
+                        </li>
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#addCoins"><i
+                                    class="bi bi-c-circle"></i> Coins
+                                ({{ auth()->user()->minutes }})</a>
+                        </li>
+                        <li class=" nav-item d-block d-lg-none"><a href="{{ url('/logout') }}"
+                                class="nav-link click-scroll">Logout</a></li>
                     @else
-                        <li class="d-block nav-item"><a href="{{ url('/login') }}"
-                                class="nav-link click-scroll">Login</a></li>
+                        <li class="d-block nav-item"><a href="{{ url('/login') }}" class="nav-link click-scroll">Login</a>
+                        </li>
                     @endauth
-                    
+
                 </ul>
             </div>
         </div>
@@ -212,20 +212,20 @@
 
                     <ul class="site-footer-links">
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Home</a>
+                            <a href="/#section_1" class="site-footer-link">Home</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">How it works</a>
+                            <a href="/#section_2" class="site-footer-link">How it works</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">FAQs</a>
+                            <a href="/#section_5" class="site-footer-link">FAQs</a>
                         </li>
 
-                        <li class="site-footer-link-item">
+                        <!--<li class="site-footer-link-item">
                             <a href="#" class="site-footer-link">Contact</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
 
@@ -245,13 +245,10 @@
                     </p>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                <div class="col-lg-3 col-md-4 col-12 ms-auto">
 
 
-                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2048 Topic Listing Center. All rights reserved.
-                        <br><br>Design: <a rel="nofollow" href="https://templatemo.com"
-                            target="_blank">TemplateMo</a> Distribution <a
-                            href="https://themewagon.com">ThemeWagon</a>
+                    <p class="copyright-text">Copyright © 2048 Topic Listing Center. All rights reserved.
                     </p>
 
                 </div>
