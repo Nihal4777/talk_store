@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Talk;
 use App\Models\TalkMessage;
 use Illuminate\Http\Request;
@@ -161,4 +162,13 @@ class TalksController extends Controller
         $talk->delete();
         return redirect(route('talks.index'))->withSuccess("Talk Deleted");
     }
+
+
+/* ---------------------------- Admin Only Route ---------------------------- */
+    public function admin_talksPurchases(Request $request){
+        $orders=Order::where(['is_authorized'=>1])->orderByDesc('created_at')->get();
+        return view("admin.talksPurchases",compact('orders'));
+    }
+
+
 }

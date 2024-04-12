@@ -12,4 +12,7 @@ class Order extends Model
     public function talk():BelongsTo{
         return $this->belongsTo(Talk::class);
     }
+    public function user():BelongsTo{
+        return $this->belongsTo(User::class);
+    }
 }
