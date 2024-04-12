@@ -36,6 +36,12 @@
                         <span class="title">Add Scripts</span>
                     </a>
                 </li>
+                <li class="list {{ Request::segment(2) == 'purchases' ? 'active' : '' }}">
+                    <a href="/admin/purchases/talks">
+                        <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                        <span class="title">Talk Purchases Scripts</span>
+                    </a>
+                </li>
                 <!--<li class="list">
                     <a href="./manage-subscription.html">
                         <span class="icon"><ion-icon name="person-outline"></ion-icon></span>

@@ -32,6 +32,7 @@ Route::get('/dashboard', function () {
 Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(function () {
     Route::resource('categories',CategoriesController::class);
     Route::resource('talks',TalksController::class);
+    Route::get('purchases/talks',[TalksController::class,'admin_talksPurchases']);
 });
 
 Route::middleware(['auth','role:user'])->group(function () {
