@@ -9,12 +9,12 @@
             <tbody>
                @foreach ($categories as $id=>$category)
                <tr>
-                <th scope="row">{{$id+1}}</th>
-                <td>{{$category->name}}</td>
-                <td>
+                <th scope="row" class="bg-transparent">{{$id+1}}</th>
+                <td class="bg-transparent">{{$category->name}}</td>
+                <td class="bg-transparent">
                     <a class="btn btn-success" href="{{route("categories.edit",$category->id)}}">Edit</a>
                 </td>
-                <td>
+                <td class="bg-transparent">
                     <form  method="POST" action="{{route('categories.destroy', ['category' => $category->id])}}">
                         @method('DELETE')
                         @csrf

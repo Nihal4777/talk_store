@@ -24,7 +24,7 @@
             <input type="text" class="form-control" placeholder="Person 2 name" name="person2_name" value="{{$talk->person2_name}}" id="">
         </div>
         <div class="form-group col-md-6 col-12">
-            <textarea class="form-control" id="" name="description" placeholder="Enter description"> {{$talk->description}}</textarea>
+            <textarea class="form-control" id="" name="description" placeholder="Enter description">{{$talk->description}}</textarea>
         </div>
         <div class="form-group col-12">
             <textarea class="form-control" id="" rows="15" name="script" placeholder="Enter script">@foreach ($talk->script as $line){{$line->message}}
@@ -40,6 +40,6 @@
         </div>
     </div>
     <div>
-        <button type="submit" class="btn btn-warning font-weight-bold">{{$type}} Script</button>
+        <button type="submit" class="btn btn-warning font-weight-bold mt-3">{{$type}} Script</button>
     </div>
 </form>
