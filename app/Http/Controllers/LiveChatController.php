@@ -17,35 +17,41 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 class LiveChatController extends Controller
 {
-    function realTimeChat(){
+    function realTimeChat($expert_id){
         $user = auth()->user();
         /* ----------------- Check if the user is already connected ----------------- */
         $expert=UserHasExpert::where(['user_id'=>$user->id,'end_time'=>NULL])->first();
-        if(!empty($expert))
+        if(!empty($expert)){
+            $expert=$expert->expert;
             return view('liveChat', compact('user', 'expert'));
+        }
         /* ------------------------------------ - ----------------------------------- */
 
         /* ------------------------ Check if user has minutes ----------------------- */
         if($user->minutes<1) return redirect()->back()->with(['error' => 'No coins']);
-        $expert = $this->getFreeExpert();
-        if (empty($expert)) return view('noExpert');
+        $expert = User::find($expert_id);
 
         DB::transaction(function() use ($user,$expert){
-            $oe = OnlineUser::where('user_id', $expert->user_id)->first();
+            $oe = OnlineUser::where('user_id', $expert->id)->first();
             $oe->is_busy = true;
             $oe->save();
             $ue = new UserHasExpert;
             $ue->user_id = $user->id;
             $ue->start_time = date('Y-m-d h:i:s');
-            $ue->expert_id = $expert->user_id;
+            $ue->expert_id = $expert->id;
             $ue->rate_per_min = env('RATE_PER_MIN');
             $ue->save();
         });
-        event(new UserConnected($expert->user_id));
+        event(new UserConnected($expert->id));
         return view('liveChat', compact('user', 'expert'));
     }
-    function expertLiveChat()
-    {
+    function realTimeChatExpertsPage(){
+        $experts = OnlineUser::where(['is_expert' => true, 'is_busy' => false])->get();
+        if (!count($experts)) return view('noExpert');
+        return view("realTimeChatExpertsPage",compact('experts'));
+    }
+
+    function expertLiveChat(){
         $user = auth()->user();
         $ue=UserHasExpert::where(['expert_id'=>$user->id,'end_time'=>NULL])->first();
         if(empty($ue)){
@@ -142,11 +148,10 @@ class LiveChatController extends Controller
         return redirect()->back()->with('success','Expert Removed');;
     }
 
-
-    private function getFreeExpert()
-    {
-        $onlineExperts = OnlineUser::where(['is_expert' => true, 'is_busy' => false])->get();
-        if(!count($onlineExperts)) return NULL;
-        return $onlineExperts->random();
-    }
+    // private function getFreeExpert()
+    // {
+    //     $onlineExperts = OnlineUser::where(['is_expert' => true, 'is_busy' => false])->get();
+    //     if(!count($onlineExperts)) return NULL;
+    //     return $onlineExperts->random();
+    // }
 }

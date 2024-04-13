@@ -41,7 +41,7 @@
         var pusher = new Pusher('1c736033547afaeacd02', {
             cluster: 'ap2'
         });
-        var channel = pusher.subscribe('presence-chat-{{ $expert->user_id }}-{{ $user->id }}');
+        var channel = pusher.subscribe('presence-chat-{{ $expert->id }}-{{ $user->id }}');
         channel.bind('my-event', function(data) {
             // alert(JSON.stringify(data));
             let parent1 = document.createElement('div');
@@ -88,7 +88,8 @@
                     if (res.status) {
                         textArea.value='';
                     } else {
-                        alert("Some error occurred");
+                        alert("Minutes Exhausted");
+                        window.location.href="/realTimeChat/experts/"
                     }
                 }).finally(() => {
                     textArea.disabled = false;

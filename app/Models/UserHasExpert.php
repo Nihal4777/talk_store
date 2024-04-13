@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserHasExpert extends Model
 {
     use HasFactory;
+    protected $table='sessions';
     public function expert():BelongsTo{
         return $this->belongsTo(User::class);
     }
