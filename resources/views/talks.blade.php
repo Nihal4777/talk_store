@@ -38,15 +38,13 @@
                                 <div class="d-flex">
                                     <div>
                                         <h5 class="mb-2">{{ $talk->title }}</h5>
-
                                         <p class="mb-0">{{ $talk->description }}</p>
                                         <p class="mb-0">₹{{ $talk->price }}</p>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-success" name="talkId" value="{{ $talk->id }}"form="createOrder">Buy
                                     Now</button>
-
-                                <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
+                                <img src="{{asset($talk->image)}}"
                                     class="custom-block-image img-fluid" alt="">
                             </div>
                         </div>

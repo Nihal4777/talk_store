@@ -63,19 +63,19 @@
                         <a class="nav-link click-scroll" href="/talks">Browse Talks</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item d-lg-block d-none">
                         <a class="nav-link click-scroll" href="/#section_2">How it works</a>
                     </li>
 
 
 
-                    <li class="nav-item">
+                    <li class="nav-item d-lg-block d-none">
                         <a class="nav-link click-scroll" href="/#section_4">Pricing</a>
                     </li>
 
 
 
-                    <li class="nav-item">
+                    <li class="nav-item d-lg-block d-none">
                         <a class="nav-link click-scroll" href="/#section_5">FAQs</a>
                     </li>
 
@@ -91,7 +91,7 @@
                         <a class="nav-link click-scroll" href="/realTimeChat">Live Chat</a>
                     </li>
                     @auth
-                        <li class="nav-item dropdown d-none d-lg-block">
+                        <li class="nav-item dropdown d-none d-lg-block" style="width: 140px">
                             <a class="nav-link click-scroll dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Profile
@@ -125,9 +125,7 @@
                             <a class="nav-link click-scroll" href="/purchases">My Purchases</a>
                         </li>
 
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link click-scroll" href="/realTimeChat">Live Chat</a>
-                        </li>
+                     
                         <li class="nav-item d-block d-lg-none">
                             <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#addCoins"><i
                                     class="bi bi-c-circle"></i> Coins
@@ -194,7 +192,20 @@
     </div>
 
     {{ $slot }}
-
+    @if (Session::has('error'))
+        <div class="toast-container position-fixed bottom-0 end-0 p-3 ">
+            <div id="liveToast" class="toast fade show bg-danger" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="toast-header bg-danger">
+                    <strong class="me-auto text-white fw-bold">Failure</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <p class="text-white">{{ Session::get('error') }}</p>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <footer class="site-footer section-padding bg-white">
         <div class="container">

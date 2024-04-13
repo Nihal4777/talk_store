@@ -53,9 +53,9 @@ class WebsiteController extends Controller
             $cm->line_message = $talk->script->first()->message;
             $cm->save();
             $cm = new Collection([$cm]);
-            return view('conversationPage', compact('cm', 'talk'));
+            return view('conversationPage', compact('cm', 'talk','order'));
         }
         $cm = $cm->get();
-        return view('conversationPage', compact('cm', 'talk'));
+        return view('conversationPage', compact('cm', 'talk','order'));
     }
 }

@@ -1,16 +1,7 @@
 <x-admin-layout>
-    <div class="heading">
-        Script
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
+
+    
+  
 
     <div class="mt-5">
         <table class="table table-hover">
