@@ -100,7 +100,7 @@
                     <h2 class="text-white">Pricing Plans</h2>
                 </div>
                 <div class="row text-center">
-                    <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s"
+                    <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp mt-3" data-wow-duration="1s"
                         data-wow-delay="0.1s" data-wow-offset="0"
                         style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
                         <div class="pricing_design">
@@ -121,7 +121,7 @@
                             </div>
                         </div>
                     </div><!--- END COL -->
-                    <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s"
+                    <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp mt-3 mt-3" data-wow-duration="1s"
                         data-wow-delay="0.2s" data-wow-offset="0"
                         style="visibility: visible; animation-duration: 1s; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="pricing_design">
