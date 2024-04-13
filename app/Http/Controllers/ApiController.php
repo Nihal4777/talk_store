@@ -57,7 +57,13 @@ class ApiController extends Controller
             return response()->json(['status' => true,'x'=>$user->id.'-'.$ue->user_id.'-'.$request->message]);
         }
         else{
-            $ue=UserHasExpert::where(['user_id'=>$user->id])->first();
+            $ue=UserHasExpert::where(['user_id'=>$user->id,'end_time'=>NULL])->first();
+            $timestamp2 = strtotime(date('Y-m-d h:i:s'));
+            $timestamp1 = strtotime($ue->start_time);
+            $minutes=($timestamp2-$timestamp1)/60;
+            if(ceil($minutes)>$user->minutes){
+                return response()->json(['status' => false]);
+            }
             event(new MessageSend($user->id,$ue->expert_id,$request->message));
             return response()->json(['status' => true,'x'=>$ue->expert_id.'-'.$user->id.'-'.$request->message]);
         }

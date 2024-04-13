@@ -42,7 +42,8 @@ Route::middleware(['auth','role:user'])->group(function () {
    Route::post('verifyOrderMin',[PaymentController::class,'verifyOrderMin']);
    Route::get('purchases',[WebsiteController::class,'purchasesPage']);
    Route::get('/talk/chat/{talk_id}',[WebsiteController::class,'conversationPage']);
-   Route::get('realTimeChat',[LiveChatController::class,'realTimeChat']);
+   Route::get('realTimeChat/experts',[LiveChatController::class,'realTimeChatExpertsPage']);
+   Route::post('realTimeChat/experts/{id}',[LiveChatController::class,'realTimeChat']);
 });
 Route::middleware(['auth','role:expert','verified'])->group(function () {
     Route::get('/expert/liveChat',[LiveChatController::class,'expertLiveChat']);

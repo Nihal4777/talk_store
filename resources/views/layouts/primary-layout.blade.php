@@ -78,17 +78,8 @@
                     <li class="nav-item d-lg-block d-none">
                         <a class="nav-link click-scroll" href="/#section_5">FAQs</a>
                     </li>
-
-                    {{-- <li class="nav-item">
-                        <a class="nav-link click-scroll" href="./chatpage.html">Conversation Page</a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="./past-purchase.html">Past Purchase</a>
-                    </li> --}}
-
-
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="/realTimeChat">Live Chat</a>
+                        <a class="nav-link click-scroll" href="/realTimeChat/experts">Live Chat</a>
                     </li>
                     @auth
                         <li class="nav-item dropdown d-none d-lg-block" style="width: 140px">
@@ -125,7 +116,7 @@
                             <a class="nav-link click-scroll" href="/purchases">My Purchases</a>
                         </li>
 
-                     
+
                         <li class="nav-item d-block d-lg-none">
                             <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#addCoins"><i
                                     class="bi bi-c-circle"></i> Coins
@@ -206,7 +197,6 @@
             </div>
         </div>
     @endif
-
     <footer class="site-footer section-padding bg-white">
         <div class="container">
             <div class="row">
