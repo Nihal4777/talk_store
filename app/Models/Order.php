@@ -10,7 +10,7 @@ class Order extends Model
 {
     use HasFactory;
     public function talk():BelongsTo{
-        return $this->belongsTo(Talk::class);
+        return $this->belongsTo(Talk::class)->withTrashed();
     }
     public function user():BelongsTo{
         return $this->belongsTo(User::class);
