@@ -9,7 +9,7 @@
                         <h1 class="display-4 text-white mb-4 animated slideInRight">Learn how to communicate</h1>
                         <p class="text-white mb-4 animated slideInRight">Here you can eaily learn about how to become a
                             good in coversation</p>
-                        <a href=""
+                        <a href="/talks"
                             class="btn btn-light py-sm-3 px-sm-5 rounded-pill me-3 animated slideInRight">Start
                             learning</a>
                         <!--<a href="/talks"
@@ -138,7 +138,7 @@
                                 <div class="pricing-price">
 
                                 </div>
-                                <a href="./realTimeChat" class="price_btn">Start Now</a>
+                                <a href="./realTimeChat/experts" class="price_btn">Start Now</a>
                             </div>
                         </div>
                     </div><!--- END COL -->
