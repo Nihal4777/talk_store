@@ -249,7 +249,7 @@
                 <div class="col-lg-3 col-md-4 col-12 ms-auto">
 
 
-                    <p class="copyright-text">Copyright © 2048 Topic Listing Center. All rights reserved.
+                    <p class="copyright-text">Copyright © 2024 Topic Listing Center. All rights reserved.
                     </p>
 
                 </div>
