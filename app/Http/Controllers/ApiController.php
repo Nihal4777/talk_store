@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSend;
 use App\Models\ChatMessage;
+use App\Models\Order;
 use App\Models\TalkMessage;
 use App\Models\UserHasExpert;
 use Illuminate\Validation\Rule;
@@ -19,23 +20,33 @@ class ApiController extends Controller
             })]
 
         ]);
+        $totalCount=TalkMessage::where(['talk_id' => $request->talk_id])->count();
+        $completedCount=ChatMessage::where(['talk_id' => $request->talk_id,'user_id'=>$user->id])->count();
         $tm = TalkMessage::where(['talk_id' => $request->talk_id])->whereIn('seq', [$request->seq, $request->seq + 1])->get();
-        if (count($tm) > 1) {
+        if($totalCount>$completedCount){
             $cm = new ChatMessage();
             $cm->line_message = $request->message;
             $cm->user_id = $user->id;
             $cm->talk_id = $request->talk_id;
             $cm->save();
-
-            $cm = new ChatMessage();
-            $cm->user_id = $user->id;
-            $cm->talk_id = $request->talk_id;
-            $cm->line_message = $tm[1]->message;
-            $cm->save();
-            return response()->json(['nextMessage' => $tm[0]->message, 'nextSeq' => $tm[0]->seq, 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => false]);
-        } else {
-            return response()->json(['nextMessage' => '', 'nextSeq' => '', 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => true]);
+            $completedCount+=1;
+            if (count($tm) > 1) {
+                $cm = new ChatMessage();
+                $cm->user_id = $user->id;
+                $cm->talk_id = $request->talk_id;
+                $cm->line_message = $tm[1]->message;
+                $cm->save();
+                $completedCount+=1;
+                $responseData=['nextMessage' => $tm[1]->message, 'nextSeq' => '', 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => $completedCount==$totalCount];
+            } else {
+                $responseData=['nextMessage' => NULL, 'nextSeq' => '', 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => $completedCount==$totalCount];
+            }
+            $order=Order::where(['talk_id'=>$request->talk_id,'user_id'=>$user->id])->first();
+            $order->progress=$completedCount/$totalCount*100;
+            $order->save();
+            return response()->json($responseData);
         }
+        return response()->json(400);
     }
     function sendChatMessage(Request $request){
         $user=auth()->user();

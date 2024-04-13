@@ -37,41 +37,19 @@
                         <span class="title">Add Scripts</span>
                     </a>
                 </li>
+                <li class="list {{ Request::segment(2) == 'experts' ? 'active' : '' }}">
+                    <a href="/admin/experts">
+                        <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
+                        <span class="title">Manage experts</span>
+                    </a>    
+                </li>
                 <li class="list {{ Request::segment(2) == 'purchases' ? 'active' : '' }}">
                     <a href="/admin/purchases/talks">
                         <span class="icon"><ion-icon name="cash-outline"></ion-icon></span>
                         <span class="title">Talk Purchases Scripts</span>
                     </a>
                 </li>
-                <!--<li class="list">
-                                <a href="./manage-subscription.html">
-                                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                                    <span class="title">Manage Subscription</span>
-                                </a>
-                            </li>
-                            <li class="list">
-                                <a href="./manage-users.html">
-                                    <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
-                                    <span class="title">Manage Users</span>
-                                </a>
-                            </li>-->
-
-                <!-- <li class="list">
-                                <a href="#">
-                                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                                    <span class="title">Setting</span>
-                                </a> -->
-                <!--    </li> <li class="list">
-                                <a href="#">
-                                    <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
-                                    <span class="title">Help</span>
-                                </a>
-                            </li> <li class="list">
-                                <a href="#">
-                                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                                    <span class="title">Password</span>
-                                </a>
-                            </li>-->
+               
                 <li class="list">
                     <a href="{{ route('logout') }}">
                         <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
@@ -113,39 +91,33 @@
     <div class="workspace">
         {{ $slot }}
         @if (Session::has('success'))
-           <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast show fade bg-success" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header bg-success">
-      <strong class="me-auto text-white fw-bold">Success</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-     <div class="toast-body text-white">
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast show fade bg-success" role="alert" aria-live="assertive"
+                    aria-atomic="true">
+                    <div class="toast-header bg-success">
+                        <strong class="me-auto text-white fw-bold">Success</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body text-white">
                         {{ Session::get('success') }}
                     </div>
-  </div>
-</div>
-                   
-               
+                </div>
+            </div>
         @endif
         @if ($errors->any())
-        <div class="toast-container position-fixed bottom-0 end-0 p-3 ">
-  <div id="liveToast" class="toast fade show bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header bg-danger">
-      <strong class="me-auto text-white fw-bold">Failure</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body text-white">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3 ">
+                <div id="liveToast" class="toast fade show bg-danger" role="alert" aria-live="assertive"
+                    aria-atomic="true">
+                    <div class="toast-header bg-danger">
+                        <strong class="me-auto text-white fw-bold">Failure</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
                     </div>
-
-  </div>
-</div>
-                    
-
+                    <div class="toast-body text-white">
+                        <p>{{ $error }}</p>
+                    </div>
+                </div>
+            </div>
         @endif
 
     </div>
@@ -154,12 +126,9 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets/js/admin.js') }}"></script>
 </body>
 

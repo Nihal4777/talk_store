@@ -6,11 +6,15 @@ use App\Events\MessageSend;
 use App\Events\UserConnected;
 use App\Models\OnlineUser;
 use App\Models\Session;
+use App\Models\User;
 use App\Models\UserHasExpert;
+use App\Notifications\SendExpertPassword;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
-
+use Illuminate\Support\Str;
 class LiveChatController extends Controller
 {
     function realTimeChat(){
@@ -96,6 +100,48 @@ class LiveChatController extends Controller
 
         event(new MessageSend($receiver_id, $user->id));
     }
+
+    public function manageExpertsPage(Request $request){
+        $experts = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'expert');
+            }
+        )->get();
+        return view("admin.manageExperts",compact('experts'));
+    }
+
+    public function addExperts(Request $request){
+        $request->validate(['name'=>'required',
+        'email'=>'required|email:rfc,dns']);
+        $user=User::withTrashed()->firstOrNew([
+            'email' => $request->email
+        ]);
+        if ($user->trashed()) {
+            $user->restore();
+            $pwd=Str::random('8');
+            $user->password=Hash::make($pwd);
+            $user->save();
+            $user->assignRole('expert');
+            $user->notify(new SendExpertPassword($request->email,$pwd));
+            return redirect()->back()->with('success','User Restored Successfully');
+        }        
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->email_verified_at=date("d-m-Y h:i:s");
+        $pwd=Str::random('8');
+        $user->password=Hash::make($pwd);
+        $user->save();
+        $user->assignRole('expert');
+        $user->notify(new SendExpertPassword($request->email,$pwd));
+        return redirect()->back()->with('success','User Added Successfully');
+    }
+    public function removeExpert($expert){
+        $user=User::find($expert);
+        if($user->hasRole('expert'))
+            $user->delete();
+        return redirect()->back()->with('success','Expert Removed');;
+    }
+
 
     private function getFreeExpert()
     {

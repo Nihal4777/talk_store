@@ -40,8 +40,13 @@
                         @endforeach
                     </div>
                     <div class="card-footer">
-                        <div class="input-group d-flex justify-content-center">
-                            <textarea name="message" id="textArea" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                        <div class="input-group d-flex justify-content-center" id="footerBox">
+                            @if($order->progress!=100){
+                                <textarea name="message" id="textArea" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                            }
+                            @else
+                            Completed Successfully
+                            @endif
                             <div class="input-group-append">
                                 <span class="input-group-text send_btn" id="send_btn" onclick="sendChat(event)"><i class="bi bi-send"></i></span>
                             </div>
@@ -56,7 +61,7 @@
             textArea.disabled=true;
             send_btn.disabled=true;
             let newSeq=Number(mainContainer.children[mainContainer.children.length-1].dataset.seq)+1;
-            fetch('http://localhost:8000/api/sendMessage',{
+            fetch('/api/sendMessage',{
                 'headers':{'accept':'application/json',
                 'content-type':'application/json',},
                 'method':'POST',
@@ -67,16 +72,7 @@
                 })
             })
             .then((e)=>e.json()).then((res)=>{
-				let parent1=document.createElement('div');
-                    parent1.classList.add('d-flex','justify-content-start','mb-4');
-                    let child1=document.createElement('div');
-                    child1.classList.add('msg_cotainer');
-                    child1.innerText=res.nextMessage;
-                    parent1.appendChild(child1);
-                    mainContainer.appendChild(parent1);
-                    parent1.dataset.seq=res.nextSeq;
-                if(!res.isEnd){
-                    let parent=document.createElement('div');
+				    let parent=document.createElement('div');
                     parent.classList.add('d-flex','justify-content-end','mb-4');
                     let child=document.createElement('div');
                     child.classList.add('d-flex','flex-column');
@@ -87,9 +83,19 @@
                     parent.appendChild(child);
                     mainContainer.appendChild(parent);
                     parent.dataset.seq=newSeq;
+                if(res.nextMessage){
+                    let parent1=document.createElement('div');
+                    parent1.classList.add('d-flex','justify-content-start','mb-4');
+                    let child1=document.createElement('div');
+                    child1.classList.add('msg_cotainer');
+                    child1.innerText=res.nextMessage;
+                    parent1.appendChild(child1);
+                    mainContainer.appendChild(parent1);
+                    parent1.dataset.seq=res.nextSeq;
+                    
                 }
-                else{
-                    alert("Completed");
+                if(res.isEnd){
+                    footerBox.innerText='Completed Successfully';
                 }
 				mainContainer.scrollTo(0, mainContainer.scrollHeight);
             }).finally(()=>{

@@ -23,9 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[WebsiteController::class,'homepage']);
 Route::get('/talks',[WebsiteController::class,'talks']);
 
-
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified','role:admin'])->name('dashboard');
@@ -33,6 +30,9 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(fun
     Route::resource('categories',CategoriesController::class);
     Route::resource('talks',TalksController::class);
     Route::get('purchases/talks',[TalksController::class,'admin_talksPurchases']);
+    Route::get('experts',[LiveChatController::class,'manageExpertsPage']);
+    Route::post('experts',[LiveChatController::class,'addExperts']);
+    Route::delete('removeExpert/{id}',[LiveChatController::class,'removeExpert']);
 });
 
 Route::middleware(['auth','role:user'])->group(function () {
