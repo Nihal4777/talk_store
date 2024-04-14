@@ -53,7 +53,7 @@ class ApiController extends Controller
         $user=auth()->user();
         $request->validate(['message'=>'required']);
         if($user->hasRole('expert')){
-            $ue=UserHasExpert::where(['expert_id'=>$user->id])->first();
+            $ue=UserHasExpert::where(['expert_id'=>$user->id,'end_time'=>NULL])->first();
              /* ---------------------- Storing messages in Database ---------------------- */
              $cm = new Message();
              $cm->user_id = $user->id;
