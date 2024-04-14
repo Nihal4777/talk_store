@@ -35,7 +35,7 @@ Route::prefix('admin')->middleware(['auth', 'verified','role:admin'])->group(fun
     Route::delete('removeExpert/{id}',[LiveChatController::class,'removeExpert']);
 });
 
-Route::middleware(['auth','role:user'])->group(function () {
+Route::middleware(['auth','role:user','verified'])->group(function () {
    Route::post('createOrder',[PaymentController::class,'createOrder']);
    Route::post('createOrderMin',[PaymentController::class,'createOrderMin']);
    Route::post('verifyOrder',[PaymentController::class,'verifyOrder']);
