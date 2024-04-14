@@ -44,7 +44,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-success" name="talkId" value="{{ $talk->id }}"form="createOrder">Buy
                                     Now</button>
-                                    @if (!empty(asset($talk->image)))
+                                    @if (!empty($talk->image))
                                     <img src="{{asset($talk->image)}}"
                                         class="custom-block-image img-fluid" alt="">
                                     @else
