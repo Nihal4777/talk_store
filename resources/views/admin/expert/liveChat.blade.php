@@ -61,6 +61,9 @@
             // liveDot.classList.remove("offline")
             /*******************************/
             alert("User Disconnected");
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         });
     </script>
     <script>

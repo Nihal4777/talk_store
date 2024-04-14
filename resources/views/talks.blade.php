@@ -44,8 +44,13 @@
                                 </div>
                                 <button type="submit" class="btn btn-success" name="talkId" value="{{ $talk->id }}"form="createOrder">Buy
                                     Now</button>
-                                <img src="{{asset($talk->image)}}"
-                                    class="custom-block-image img-fluid" alt="">
+                                    @if (asset($talk->image) == NULL)
+                                    <img src="{{asset($talk->image)}}"
+                                        class="custom-block-image img-fluid" alt="">
+                                        @else
+                                        <img src="{{asset("assets/images/sample-img-talk.png")}}"
+                                            class="custom-block-image img-fluid" alt="">
+                                    @endif
                             </div>
                         </div>
                     @endforeach

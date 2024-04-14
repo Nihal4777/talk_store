@@ -81,12 +81,11 @@ class LiveChatController extends Controller
             $authString = env('PUSHER_APP_KEY') . ':' . $sig;
             return response()->json(['auth' => $authString, 'channel_data' => json_encode($contentData)]);
         }
-       
         if ($user->hasRole('expert')) {
-            $ue = UserHasExpert::where(['expert_id' => $user->id])->first();
+            $ue = UserHasExpert::where(['expert_id' => $user->id,'end_time'=>NULL])->first();
             $string = $request->socket_id . ":" . "presence-chat-" . $ue->user_id . "-" . $user->id . ":" . json_encode($contentData);
         } else {
-            $ue = UserHasExpert::where(['user_id' => $user->id])->first();
+            $ue = UserHasExpert::where(['user_id' => $user->id,'end_time'=>NULL])->first();
             $string = $request->socket_id . ":" . "presence-chat-" . $ue->expert_id . "-" . $user->id . ":" . json_encode($contentData);
         }
         $sig = hash_hmac('sha256', $string, env('PUSHER_APP_SECRET'));
