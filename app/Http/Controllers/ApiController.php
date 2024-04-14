@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageSend;
 use App\Models\ChatMessage;
+use App\Models\Message;
 use App\Models\Order;
 use App\Models\TalkMessage;
 use App\Models\UserHasExpert;
@@ -53,6 +54,12 @@ class ApiController extends Controller
         $request->validate(['message'=>'required']);
         if($user->hasRole('expert')){
             $ue=UserHasExpert::where(['expert_id'=>$user->id])->first();
+             /* ---------------------- Storing messages in Database ---------------------- */
+             $cm = new Message();
+             $cm->user_id = $user->id;
+             $cm->session_id = $ue->id;
+             $cm->line_message = $request->message;
+             $cm->save();
             event(new MessageSend($user->id,$ue->user_id,$request->message));
             return response()->json(['status' => true,'x'=>$user->id.'-'.$ue->user_id.'-'.$request->message]);
         }
@@ -64,6 +71,12 @@ class ApiController extends Controller
             if(ceil($minutes)>$user->minutes){
                 return response()->json(['status' => false]);
             }
+            /* ---------------------- Storing messages in Database ---------------------- */
+            $cm = new Message();
+            $cm->user_id = $user->id;
+            $cm->session_id = $ue->id;
+            $cm->line_message = $request->message;
+            $cm->save();
             event(new MessageSend($user->id,$ue->expert_id,$request->message));
             return response()->json(['status' => true,'x'=>$ue->expert_id.'-'.$user->id.'-'.$request->message]);
         }
