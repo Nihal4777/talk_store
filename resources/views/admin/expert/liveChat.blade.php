@@ -63,7 +63,7 @@
             alert("User Disconnected");
             setTimeout(() => {
                 window.location.reload();
-            }, 1000);
+            }, 3000);
         });
     </script>
     <script>
