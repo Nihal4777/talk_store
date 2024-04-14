@@ -45,8 +45,8 @@ class WebhookController extends Controller
             else if((!empty($user)) && $user->hasRole('expert')){
                 $st=explode('-',$request->events[0]['channel']);
                 if($st[1]=='waiting'){
-                    $ue = OnlineUser::where(['user_id' => $user->id,'is_busy'=>false])->first();
-                    $ue->delete();
+                    $ue = OnlineUser::where(['user_id' => $user->id,'is_busy'=>true])->first();
+                    $ue->save();
                     return ;
                 }
                 $ue = UserHasExpert::where(['expert_id' => $user->id,'end_time'=>NULL])->first();
