@@ -17,5 +17,8 @@
         channel.bind('connected', function(data) {
             window.location.href = '';
         });
+        setTimeout(()=>{
+            window.location.reload();
+        },2000);
     </script>
 </x-admin-layout>

@@ -16,12 +16,19 @@ class WebhookController extends Controller
         $req = json_decode($request->getContent());
         $user = User::find($req->events[0]->user_id);
         // if ($req->events[0]->name == "member_added" && !$user->hasRole('expert')) {
-        if ($req->events[0]->name == "member_added") {
-                // OnlineUser::where('user_id', $req->events[0]->user_id)->delete();
-                // $oUser = new OnlineUser();
-                // $oUser->user_id = $req->events[0]->user_id;
-                // $oUser->is_expert = 0;
-                // $oUser->save();
+        if ($req->events[0]->name == "member_added" ) {
+        $st=explode('-',$request->events[0]['channel']);
+            if($st[1]=='waiting'&& $user->hasRole('expert')){
+                $oe = OnlineUser::where(['user_id' => $user->id])->first();
+                if (empty($oe)) {
+                    $oe =new OnlineUser;
+                    $oe->user_id = $user->id;
+                    $oe->is_expert = true;
+                    $oe->is_busy = false;
+                    $oe->save();
+                }
+            }
+           
         } else {
             /* ---------------------------- User Disconnected --------------------------- */
             if ((!empty($user)) && $user->hasRole('user')) {
@@ -46,7 +53,8 @@ class WebhookController extends Controller
                 $st=explode('-',$request->events[0]['channel']);
                 if($st[1]=='waiting'){
                     $ue = OnlineUser::where(['user_id' => $user->id,'is_busy'=>true])->first();
-                    $ue->save();
+                    $ue->is_busy=true;
+                     (!empty($ue)) && $ue->save();
                     return ;
                 }
                 $ue = UserHasExpert::where(['expert_id' => $user->id,'end_time'=>NULL])->first();
