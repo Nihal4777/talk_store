@@ -12,7 +12,7 @@
                                         class="rounded-circle user_img">
                                 </div>
                                 <div class="user_info">
-                                    <span>Talk with Teacher</span>
+                                    <span> {{ $talk->title   }}</span>
                                     <!-- <p>1767 Messages</p> -->
                                 </div>
                             </div>
