@@ -332,7 +332,7 @@
 
                     if (currentVal > input.attr('min')) {
                         input.val(currentVal - 1).change();
-                        calculatedPrice = currentVal - 1 * 5;
+                        calculatedPrice = (currentVal - 1) * 5;
                         $('#price').text((currentVal - 1) + " mins = " + "₹ " + calculatedPrice);
                         totalCoins = currentVal - 1;
                         $(".add-coin-btn").text("Add coins " + totalCoins)
