@@ -38,7 +38,7 @@ class ApiController extends Controller
                 $cm->line_message = $tm[1]->message;
                 $cm->save();
                 $completedCount+=1;
-                $responseData=['nextMessage' => $tm[1]->message, 'nextSeq' => '', 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => $completedCount==$totalCount];
+                $responseData=['nextMessage' => $tm[1]->message, 'nextSeq' =>$tm[1]->seq, 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => $completedCount==$totalCount];
             } else {
                 $responseData=['nextMessage' => NULL, 'nextSeq' => '', 'accuracy' => similar_text($request->message, $tm[0]->message), 'isEnd' => $completedCount==$totalCount];
             }
