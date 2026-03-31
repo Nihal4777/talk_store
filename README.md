@@ -1,66 +1,243 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Talk Store
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Talk Store is a Laravel-based web application for selling guided conversation content and live expert chat time.
 
-## About Laravel
+The product has two main experiences:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Users can buy scripted "talks" and practice them line by line.
+- Users can buy minutes and start a real-time chat session with an available expert.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This repository includes the storefront, admin panel, user purchase flow, expert availability flow, and the backend logic for payments and real-time messaging.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### Public storefront
+- Browse all talks from the home page.
+- Filter talks by category.
+- View talk artwork, title, pricing, and description.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Scripted talk practice
+- Purchase a talk with Razorpay.
+- Open a private conversation page after purchase.
+- Step through a predefined script stored in the database.
+- Compare the user's submitted line with the expected line and return a simple similarity score.
+- Track progress per purchased talk.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Live expert chat
+- Purchase chat minutes separately.
+- View experts who are currently online and not busy.
+- Start a one-to-one real-time chat session with an expert.
+- Track active sessions and deduct minutes based on session length.
+- Broadcast connection, disconnection, and message events using Pusher presence channels.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Admin tools
+- Manage categories.
+- Create, edit, and delete talks.
+- Upload talk images.
+- Manage expert accounts.
+- Review purchased talks.
 
-## Laravel Sponsors
+### Auth and roles
+- Laravel Breeze-based authentication.
+- Email verification enabled.
+- Role-based access with `admin`, `user`, and `expert` using Spatie Laravel Permission.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Tech stack
 
-### Premium Partners
+- PHP 8+
+- Laravel 9
+- Blade templates
+- Vite
+- Tailwind CSS
+- Alpine.js
+- MySQL
+- Razorpay
+- Pusher
+- Spatie Laravel Permission
+- Laravel Sanctum
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Project structure
 
-## Contributing
+- `app/Http/Controllers`
+  Contains storefront, admin, payment, API, and live chat controllers.
+- `app/Models`
+  Contains the core domain models such as `Talk`, `Order`, `MinutesPurchase`, `OnlineUser`, and `UserHasExpert`.
+- `database/migrations`
+  Defines schema for talks, talk script lines, purchases, chat sessions, expert presence, and roles.
+- `resources/views`
+  Blade views for the public site, auth, admin screens, purchases, and chat pages.
+- `routes/web.php`
+  Web routes for storefront, admin actions, purchases, and expert chat.
+- `routes/api.php`
+  API endpoints used for scripted talk progression and live chat messaging.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Core domain model
 
-## Code of Conduct
+### Roles
+- `admin`: manages talks, categories, and experts.
+- `user`: purchases talks and live chat minutes.
+- `expert`: appears online and handles real-time chat sessions.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Main tables
+- `users`
+- `categories`
+- `talks`
+- `talks_messages`
+- `orders`
+- `chat_messages`
+- `minute_purchases`
+- `sessions`
+- `messages`
+- `online_users`
 
-## Security Vulnerabilities
+## Key flows
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Buy and practice a talk
+1. User browses talks.
+2. User creates a Razorpay order for a talk.
+3. Payment is verified and stored in `orders`.
+4. User opens the conversation page for that purchased talk.
+5. The app seeds the first line of the script if the conversation is new.
+6. Each submitted message is compared with the expected line and progress is updated.
 
-## License
+### 2. Buy minutes and start expert chat
+1. User purchases minutes through Razorpay.
+2. Verified payment increases the user's minute balance.
+3. Experts mark themselves available by joining the waiting presence channel.
+4. User chooses an available expert.
+5. A session record is created in `sessions` and the expert is marked busy.
+6. Messages are exchanged over Pusher channels and stored in the database.
+7. When the session ends, minutes are deducted from the user balance.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Important environment variables
+
+Start from `.env.example` and add the values below.
+
+### Application
+- `APP_NAME`
+- `APP_ENV`
+- `APP_KEY`
+- `APP_URL`
+
+### Database
+- `DB_CONNECTION`
+- `DB_HOST`
+- `DB_PORT`
+- `DB_DATABASE`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+
+### Mail
+Used when the admin adds an expert and the app emails generated credentials.
+
+- `MAIL_MAILER`
+- `MAIL_HOST`
+- `MAIL_PORT`
+- `MAIL_USERNAME`
+- `MAIL_PASSWORD`
+- `MAIL_FROM_ADDRESS`
+- `MAIL_FROM_NAME`
+
+### Pusher
+Required for live expert presence and real-time chat.
+
+- `BROADCAST_DRIVER=pusher`
+- `PUSHER_APP_ID`
+- `PUSHER_APP_KEY`
+- `PUSHER_APP_SECRET`
+- `PUSHER_HOST`
+- `PUSHER_PORT`
+- `PUSHER_SCHEME`
+- `PUSHER_APP_CLUSTER`
+- `VITE_PUSHER_APP_KEY`
+- `VITE_PUSHER_HOST`
+- `VITE_PUSHER_PORT`
+- `VITE_PUSHER_SCHEME`
+- `VITE_PUSHER_APP_CLUSTER`
+
+### Razorpay
+Required for both talk purchases and minute purchases.
+
+- `RAZORPAY_KEY`
+- `RAZORPAY_SECRET`
+
+### Chat billing
+- `RATE_PER_MIN`
+
+## Local setup
+
+### 1. Install dependencies
+```bash
+composer install
+npm install
+```
+
+### 2. Create environment file
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+On Windows PowerShell, use:
+```powershell
+Copy-Item .env.example .env
+php artisan key:generate
+```
+
+### 3. Configure database and services
+Update `.env` with your MySQL, mail, Pusher, Razorpay, and `RATE_PER_MIN` values.
+
+### 4. Run migrations and seed roles
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+The default seed creates:
+- Admin email: `admin@example.com`
+- Admin password: `admin@123`
+
+Change these credentials immediately outside of local development.
+
+### 5. Build frontend assets
+```bash
+npm run dev
+```
+
+For a production build:
+```bash
+npm run build
+```
+
+### 6. Run the app
+```bash
+php artisan serve
+```
+
+## Default routes
+
+### Public
+- `/` - home page
+- `/talks` - talk listing page
+
+### User
+- `/purchases` - purchased talks
+- `/talk/chat/{talk_id}` - scripted talk conversation page
+- `/realTimeChat/experts` - available expert list
+
+### Expert
+- `/expert/liveChat` - expert waiting/live chat page
+
+### Admin
+- `/dashboard`
+- `/admin/categories`
+- `/admin/talks`
+- `/admin/purchases/talks`
+- `/admin/experts`
+
+## API endpoints
+
+Authenticated users with `user` or `expert` role can access:
+
+- `POST /api/sendMessage` - continue a scripted talk
+- `POST /api/sendChatMessage` - send a live chat message
